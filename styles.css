@@ -1,0 +1,133 @@
+/* EverPro Painting — everpropaintingkc.com
+   Brand palette: change these variables and the whole site follows. */
+:root {
+  --brand: #5dafe1;       /* EverPro logo blue — sampled from IMG_2206/logo_v2 */
+  --navy: #16496e;        /* deep EverPro blue — headers, footer (same hue family as the logo) */
+  --navy-dark: #0f344f;
+  --white: #ffffff;
+  --off-white: #f4f9fd;   /* faint brand-blue tint */
+  --ink: #23272e;         /* body text */
+  --muted: #5b6470;
+  --accent: #e0762c;      /* CTA orange — complementary to the brand blue */
+  --accent-dark: #c05e17;
+  --gold: #f5b942;        /* stars */
+  --radius: 10px;
+  --shadow: 0 2px 14px rgba(18, 32, 58, .10);
+  --maxw: 1120px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; font-size: 17px; }
+img { max-width: 100%; display: block; border-radius: var(--radius); }
+a { color: var(--accent-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+section { padding: 64px 0; }
+h1, h2, h3 { color: var(--navy); line-height: 1.2; font-weight: 800; }
+h1 { font-size: clamp(1.9rem, 4.5vw, 3.1rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: .6em; }
+h3 { font-size: 1.15rem; margin-bottom: .4em; }
+p  { margin-bottom: 1em; }
+.center { text-align: center; }
+.sub { color: var(--muted); font-size: 1.06rem; max-width: 720px; margin: 0 auto 1.5em; }
+
+/* Top bar + nav */
+.topbar { background: var(--navy-dark); color: #cdd6e4; font-size: .92rem; padding: 7px 0; }
+.topbar .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.topbar a { color: var(--white); font-weight: 700; }
+header.site { background: var(--white); position: sticky; top: 0; z-index: 50; box-shadow: 0 1px 8px rgba(0,0,0,.08); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; padding-bottom: 12px; }
+.logo { display: flex; align-items: center; }
+.logo img { height: 72px; width: auto; border-radius: 0; }
+@media (max-width: 860px) { .logo img { height: 56px; } }
+nav.main a { color: var(--navy); font-weight: 600; margin-left: 22px; font-size: .98rem; }
+nav.main a:hover { color: var(--accent-dark); text-decoration: none; }
+nav.main a.cta { background: var(--accent); color: var(--white); padding: 10px 18px; border-radius: 999px; }
+nav.main a.cta:hover { background: var(--accent-dark); }
+.menu-toggle { display: none; background: none; border: 0; font-size: 1.7rem; color: var(--navy); cursor: pointer; }
+
+/* Hero */
+.hero { background: linear-gradient(rgba(18,32,58,.62), rgba(18,32,58,.62)), url('images/hero-exterior.jpg') center/cover no-repeat; color: var(--white); padding: 110px 0 120px; text-align: center; }
+.hero h1 { color: var(--white); margin-bottom: .4em; }
+.hero p.lead { font-size: 1.2rem; max-width: 680px; margin: 0 auto 1.6em; color: #e8edf5; }
+.btn { display: inline-block; background: var(--accent); color: var(--white); font-weight: 800; font-size: 1.05rem; padding: 15px 34px; border-radius: 999px; border: 0; cursor: pointer; }
+.btn:hover { background: var(--accent-dark); text-decoration: none; }
+.btn.ghost { background: transparent; border: 2px solid var(--white); margin-left: 12px; }
+.btn.ghost:hover { background: rgba(255,255,255,.12); }
+
+/* Trust bar */
+.trust { background: var(--navy); color: var(--white); padding: 18px 0; }
+.trust .wrap { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; font-weight: 700; font-size: .98rem; }
+.trust span .stars { color: var(--gold); letter-spacing: 2px; }
+
+/* Cards */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+.card img { border-radius: 0; aspect-ratio: 4/3; object-fit: cover; }
+.card img.ba { aspect-ratio: auto; object-fit: contain; background: var(--off-white); } /* before/after composites — never crop */
+.bapair { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.bapair figure { position: relative; margin: 0; }
+.bapair img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 0; }
+.bapair figcaption { position: absolute; bottom: 8px; left: 8px; background: rgba(15,52,79,.85); color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 999px; }
+.bapair.stack { grid-template-columns: 1fr; gap: 14px; }
+.bapair.stack img { aspect-ratio: 4/3; border-radius: var(--radius); }
+.socials { display: flex; gap: 14px; margin-top: .6em; }
+.socials a { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: var(--white); font-weight: 800; font-size: .95rem; text-decoration: none; }
+.socials a:hover { background: var(--brand); }
+footer .socials a { background: #2c3c58; }
+footer .socials a:hover { background: var(--brand); }
+.card .pad { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+.card .pad a.more { margin-top: auto; font-weight: 700; }
+.alt { background: var(--off-white); }
+
+/* Split (why us) */
+.split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: center; }
+.split ul { list-style: none; margin: 1em 0; }
+.split li { padding-left: 30px; position: relative; margin-bottom: .7em; }
+.split li::before { content: "✔"; position: absolute; left: 0; color: var(--brand); font-weight: 900; }
+
+/* Reviews */
+.review { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; }
+.review .stars { color: var(--gold); font-size: 1.1rem; letter-spacing: 3px; margin-bottom: .5em; }
+.review .who { color: var(--muted); font-size: .92rem; margin-top: .8em; }
+
+/* Areas */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.chips span, .chips a { background: var(--off-white); border: 1px solid #e2e6ec; color: var(--navy); border-radius: 999px; padding: 8px 18px; font-weight: 600; font-size: .95rem; }
+
+/* FAQ */
+details { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; padding: 4px 22px; }
+summary { cursor: pointer; font-weight: 700; color: var(--navy); padding: 14px 0; list-style: none; position: relative; padding-right: 30px; }
+summary::after { content: "+"; position: absolute; right: 2px; font-size: 1.4rem; color: var(--accent); }
+details[open] summary::after { content: "–"; }
+details p { padding-bottom: 16px; color: var(--ink); }
+
+/* CTA band + form */
+.cta-band { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%); color: var(--white); text-align: center; }
+.cta-band h2 { color: var(--white); }
+form.estimate { max-width: 640px; margin: 1.5em auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; text-align: left; }
+form.estimate input, form.estimate select, form.estimate textarea { width: 100%; padding: 13px 14px; border-radius: 8px; border: 0; font-size: 1rem; font-family: inherit; }
+form.estimate textarea, form.estimate .full { grid-column: 1 / -1; }
+form.estimate button { grid-column: 1 / -1; justify-self: center; }
+
+/* Footer */
+footer { background: var(--navy-dark); color: #b9c3d4; padding: 46px 0 30px; font-size: .95rem; }
+footer .wrap { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 34px; }
+footer h3 { color: var(--white); font-size: 1rem; margin-bottom: .7em; }
+footer a { color: #dfe6f0; }
+footer .legal { grid-column: 1 / -1; border-top: 1px solid #2c3c58; margin-top: 24px; padding-top: 18px; text-align: center; color: #8a96a8; }
+
+/* Mobile */
+@media (max-width: 860px) {
+  .grid3 { grid-template-columns: 1fr; }
+  .split { grid-template-columns: 1fr; }
+  footer .wrap { grid-template-columns: 1fr; }
+  nav.main { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 14px 20px 20px; box-shadow: 0 8px 12px rgba(0,0,0,.12); }
+  nav.main.open { display: flex; flex-direction: column; gap: 14px; }
+  nav.main a { margin-left: 0; }
+  .menu-toggle { display: block; }
+  .hero { padding: 80px 0 90px; }
+  form.estimate { grid-template-columns: 1fr; }
+}
