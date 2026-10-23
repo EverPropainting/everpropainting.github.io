@@ -7,7 +7,6 @@
   <meta name="description" content="Apply for subcontractor opportunities with EverPro Painting in the Kansas City metro.">
   <title>Subcontractor Application | EverPro Painting</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="form.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#application">Skip to application</a>
@@ -16,7 +15,7 @@
     <section class="intro" aria-labelledby="page-title">
       <p class="eyebrow">Subcontractor application form</p>
       <h1 id="page-title">We're hiring — submit your application today.</h1>
-      <p class="intro-note">Crew owners and individual painters are welcome. Fill in what you can. Missing information won’t prevent you from submitting.</p>
+      <p class="intro-note">Crew owners and individual painters are welcome. Fill in what you can. Missing information won’t prevent you from submitting. Send your information first; you can share work photos, videos, and documents afterward.</p>
     </section>
     <section class="form-card" id="application" aria-labelledby="form-title">
       <h2 id="form-title">Subcontractor application form</h2>
@@ -46,8 +45,7 @@
         <fieldset><legend>Do you have liability insurance?</legend><div class="radios"><label><input type="radio" name="liability_insurance" value="Yes"> Yes</label><label><input type="radio" name="liability_insurance" value="No"> No</label></div></fieldset>
         <fieldset><legend>Do you have workers’ comp?</legend><div class="radios"><label><input type="radio" name="workers_comp" value="Yes"> Yes</label><label><input type="radio" name="workers_comp" value="No"> No</label></div></fieldset>
         <div class="field"><label for="source">How did you hear about us?</label><select id="source" name="heard_about_us"><option value="">-- Select one --</option><option>Facebook</option><option>Instagram</option><option>Craigslist</option><option>Indeed</option><option>Google</option><option>Sherwin-Williams</option><option>Referred by someone</option><option>Other</option></select></div>
-        <div class="field"><label for="documents">Upload relevant documents</label><input id="documents" name="attachment" type="file" accept="application/pdf,.pdf,image/jpeg,.jpg,.jpeg,image/png,.png" aria-describedby="file-help"><p id="file-help" class="help">Examples: insurance, W-2, or other supporting documents. Optional · PDF, JPG, or PNG · up to 10 MB. For several documents, combine them into one PDF. You can submit without an attachment.</p><p id="file-notice" class="file-notice" role="status"></p></div>
-        <div class="field"><label for="comments">Any other relevant information</label><textarea id="comments" name="additional_information" rows="5" placeholder="Share anything else you would like us to know."></textarea></div>
+<div class="field"><label for="comments">Any other relevant information</label><textarea id="comments" name="additional_information" rows="5" placeholder="Share anything else you would like us to know."></textarea></div>
         <p class="privacy">Your information will be sent to EverPro Painting for subcontractor opportunities.</p>
         <button type="submit" class="submit">Submit</button>
         <p id="submit-status" class="help" role="status" aria-live="polite"></p>
@@ -55,6 +53,36 @@
     </section>
   </main>
   <footer><strong>EverPro Painting LLC</strong><span>Kansas City metro</span><a href="tel:9132101041">913-210-1041</a><a href="mailto:main@everpropaintingkc.com">main@everpropaintingkc.com</a></footer>
+<script>
+(function () {
+  const form = document.querySelector('form');
+  if (!form) return;
+  form.addEventListener('submit', () => {
+    const id = form.elements.namedItem('application_id');
+    if (!id.value) {
+      id.value = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+      form.elements.namedItem('submitted_at').value = new Date().toISOString();
+    }
+    const email = form.elements.namedItem('applicant_email').value.trim();
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      let replyTo = form.elements.namedItem('_replyto');
+      if (!replyTo) { replyTo = document.createElement('input'); replyTo.type = 'hidden'; replyTo.name = '_replyto'; form.appendChild(replyTo); }
+      replyTo.value = email;
+    } else { form.elements.namedItem('_replyto')?.remove(); }
+    try { sessionStorage.setItem('everpro-application-context', JSON.stringify({application_id:id.value, first_name:form.elements.namedItem('first_name').value, last_name:form.elements.namedItem('last_name').value, company_name:form.elements.namedItem('company_name').value, applicant_email:email})); } catch (_) { /* Submission must work with storage disabled. */ }
+    document.getElementById('submit-status').textContent = 'Sending your application…';
+    const button = form.querySelector('button[type=submit]');
+    button.disabled = true; button.textContent = 'Sending…';
+  });
+  window.addEventListener('pageshow', () => {
+    form.elements.namedItem('application_id').value = '';
+    form.elements.namedItem('submitted_at').value = '';
+    const button = form.querySelector('button[type=submit]');
+    button.disabled = false; button.textContent = 'Submit';
+    document.getElementById('submit-status').textContent = '';
+  });
+})();
+
+</script>
 </body>
 </html>
-
